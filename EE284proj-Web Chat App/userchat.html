@@ -1,0 +1,73 @@
+<html>
+
+<head>
+
+  <title>Welcome to WebRTC app</title>
+
+  <link rel="stylesheet" href="css/main.css" >
+
+</head>
+
+<body bgcolor="yellow">
+
+<h1><u>Welcome to the webchat between users</u> </h1>
+<pre>
+
+</pre>
+<p1>1) Press Login button to register</p1>
+<pre></pre>
+<p1>2) Press call button to call the registered user</p1>
+<pre></pre>
+<div id="vid-box"></div>
+
+<form name="loginForm" id="login" action="#" onsubmit="return login(this);">
+    <input type="text" name="username" id="username" placeholder="Pick a username!" />
+    <input type="submit" name="login_submit" value="Log In">
+</form>
+
+
+<form name="callForm" id="call" action="#" onsubmit="return makeCall(this);">
+    <input type="text" name="number" placeholder="Enter user to dial!" />
+    <input type="submit" value="Call"/>
+</form>
+
+<script src="https://cdn.pubnub.com/pubnub.min.js"></script>
+<script src="main.js"></script>
+
+<script>
+var video_out = document.getElementById("vid-box");
+function login(form) {
+    var phone = window.phone = PHONE({
+        number        : form.username.value || "Anonymous", // listen on username line else Anonymous
+        publish_key   : 'pub-c-3a96506c-6695-4c6b-8bb9-443ef75367eb',
+        subscribe_key : 'sub-c-19719008-3352-11e7-bb5c-02ee2ddab7fe',
+    }); 
+    phone.ready(function(){ form.username.style.background="#55ff5b"; });
+    phone.receive(function(session){
+        session.connected(function(session) { video_out.appendChild(session.video); });
+        session.ended(function(session) { video_out.innerHTML=''; });
+    });
+    return false;   // So the form does not submit.
+}
+
+function makeCall(form){
+    if (!window.phone) alert("Login First!");
+    else phone.dial(form.number.value);
+    return false;
+}
+
+</script>
+ 
+<pre>
+
+</pre>
+  <button onclick="goBack()">Go Back</button>
+
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
+</body>
+</head>
+</html>

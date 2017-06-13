@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <title>Welcome to WebRTC app</title>
+
+  <link rel="stylesheet" href="css/main.css" >
+
+</head>
+
+<body bgcolor="yellow">
+
+  <h1><u>Welcome to the webchat room</u></h1>
+  <h2><u>Audio/video chat</u></h2>
+  <video id="localVideo" autoplay></video>
+  <video id="remoteVideo" autoplay></video>
+
+  <div>
+    <button id="startButton">video</button>
+    <button id="callButton">Call</button>
+    <button id="hangupButton">End Call</button>
+  </div>
+  <pre>
+  
+  
+  </pre>
+  <h2><u>Message chat</u></h2>
+  
+  <textarea id="dataChannelSend" disabled
+    placeholder="Press Start, enter some text, then press Send."></textarea>
+  <textarea id="dataChannelReceive" disabled></textarea>
+
+  <div id="buttons">
+    <button id="startButton1">Chat</button>
+    <button id="sendButton">Send</button>
+    <button id="closeButton">Reset</button>
+  </div>
+
+ <!-- <script src="/socket.io/socket.io.js"></script> -->
+  <script src="js/main.js"></script>
+ 
+<pre>
+
+</pre>
+  <button onclick="goBack()">Go Back</button>
+
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
+
+</body>
+
+</html>
